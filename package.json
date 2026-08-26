@@ -1,0 +1,18 @@
+{
+  "name": "saju-threads-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node --experimental-strip-types --env-file=.env scripts/threads.ts sync",
+    "publish": "node --experimental-strip-types --env-file=.env scripts/threads.ts publish",
+    "limit": "node --experimental-strip-types --env-file=.env scripts/threads.ts limit",
+    "token:refresh": "node --experimental-strip-types --env-file=.env scripts/threads.ts refresh",
+    "sync:lr": "node --experimental-strip-types --env-file=.env.loverebbit scripts/threads.ts sync",
+    "publish:lr": "node --experimental-strip-types --env-file=.env.loverebbit scripts/threads.ts publish",
+    "limit:lr": "node --experimental-strip-types --env-file=.env.loverebbit scripts/threads.ts limit",
+    "token:refresh:lr": "node --experimental-strip-types --env-file=.env.loverebbit scripts/threads.ts refresh"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}
