@@ -11,7 +11,8 @@ description: 사용자의 Threads 말투로 글을 쓰거나 초안을 검수할
 2. `references/few-shots.md` — 압축체 원문 7건 (2부 구조 레퍼런스는 few-shots-structure.md, 매트릭스·띠타겟·시의성처방 포맷 쓸 때만)
 3. `references/banned.md` 는 **읽지 않는다** — 검사는 스크립트로 (아래 자체 검사 참조)
 4. 명리 사실은 `data/reference/seun.md` 를 통째로 읽지 말고 `node scripts/lookup.mjs <지지|일간> <연도>` 로 필요한 줄만
-5. `data/drafts.json` 은 통째로 Read 금지 — node 로 필요한 id 만 발췌
+5. `data/drafts.json` · `data/posts.json` 은 통째로 Read 금지 (권한에서 차단됨) —
+   `node scripts/drafts.mjs [summary|list|pending|show <id>|grep <말>|posts [top N]]` 로 필요한 것만
 
 **few-shots 가 규칙보다 우선한다.** 규칙과 예시가 충돌하면 예시를 따른다.
 규칙은 예시에서 못 읽히는 부분만 보조한다.

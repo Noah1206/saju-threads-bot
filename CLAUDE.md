@@ -33,14 +33,15 @@ scripts/lookup.mjs              세운·지지 참조표 부분 조회 (표 전�
 scripts/gen-reference.mjs       data/reference/seun.md 재생성
 scripts/import-draft.mjs        inbox/*.txt (웹 챗 초안) -> data/drafts.json
 scripts/build-webpack.mjs       claude.ai Project 용 지식 팩 -> dist/
-data/drafts.json                초안 + 발행 이력
+scripts/drafts.mjs              drafts/posts 발췌 조회 (summary|list|pending|show|grep|posts)
+data/drafts.json                초안 + 발행 이력 — 통째로 Read 금지(권한에서 차단). drafts.mjs 로 볼 것
 data/posts.json                 내 글 + 성과 (sync 로 갱신)
 data/ideas.json                 아이디어 풀
 data/products.md                상품 13종 URL — 답글은 주제에 맞는 상품 페이지로 연결
 data/sources.md                 소재 인풋
 data/corpus/                    벤치마크 원문 (append only, 정제 금지)
 data/reference/seun.md          세운·지지·십신 참조표 (자동 생성)
-data/archive/                   구 fitpick_00 계정 발행 이력 (참고용, 소재 중복 방지)
+data/archive/                   구 fitpick_00 발행 목록 .md (소재 중복 방지용 20줄. 원문은 git 이력)
 inbox/                          웹 챗에서 뽑은 초안 .txt 임시 보관
 ```
 

@@ -14,14 +14,20 @@
       "Bash(git commit *)",
       "Bash(git push*)",
       "Bash(git pull*)",
-      "Read(data/**)",
       "Read(.claude/**)",
-      "Edit(data/**)",
-      "Write(data/**)"
+      "Read(data/*.md)",
+      "Read(data/reference/**)",
+      "Read(data/patterns/**)",
+      "Edit(data/*.md)",
+      "Write(data/*.md)"
     ],
     "deny": [
       "Read(.env)",
-      "Read(.env.*)"
+      "Read(.env.*)",
+      "Read(data/drafts.json)",
+      "Read(data/posts.json)",
+      "Read(data/archive/**)",
+      "Read(dist/**)"
     ]
   }
 }
