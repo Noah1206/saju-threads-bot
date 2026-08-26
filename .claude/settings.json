@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run sync*)",
+      "Bash(npm run limit*)",
+      "Bash(npm run publish*)",
+      "Bash(npm run token:refresh*)",
+      "Bash(node scripts/*)",
+      "Bash(node -e *)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push*)",
+      "Bash(git pull*)",
+      "Read(data/**)",
+      "Read(.claude/**)",
+      "Edit(data/**)",
+      "Write(data/**)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)"
+    ]
+  }
+}
