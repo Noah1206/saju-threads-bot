@@ -97,7 +97,8 @@ export function check(text) {
     else OK.push(claim);
   }
   // 6. 십신: "X가 Y한테 정관" / "X = 정관" 형태 중 일간이 문맥에 있는 경우만
-  for (const m of text.matchAll(new RegExp(`(${S})(?:목|화|토|금|수)?\\s*일간[^\\n]{0,40}?(${S})(?:목|화|토|금|수)?\\s*(?:가|는|이)\\s*(비견|겁재|식신|상관|편재|정재|편관|정관|편인|정인)`, "g"))) {
+  // 십신 라벨 뒤에 다른 천간이 오면 그 라벨은 뒤 글자 소유이므로 건너뛴다 (오탐 방지)
+  for (const m of text.matchAll(new RegExp(`(${S})(?:목|화|토|금|수)?\\s*일간[^\\n]{0,40}?(${S})(?:목|화|토|금|수)?\\s*(?:가|는|이)\\s*(비견|겁재|식신|상관|편재|정재|편관|정관|편인|정인)(?!\\s*${S}(?:목|화|토|금|수))`, "g"))) {
     const [, me, other, t] = m, real = sipsin(me, other), claim = `${me}일간 × ${other} = ${t}`;
     if (real !== t) FAIL.push(`${claim} -> 실제 ${real}`);
     else OK.push(claim);
