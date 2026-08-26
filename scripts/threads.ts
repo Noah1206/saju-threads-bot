@@ -3,7 +3,8 @@
  * Threads API CLI — 의존성 없음 (node 20+ / 내장 fetch)
  *
  *   npm run sync                        내 글 + 인사이트 수집 → data/posts.json
- *   npm run publish -- <draft-id> [--variant N] [--dry]
+ *   npm run publish -- <draft-id> [<draft-id> ...] [--variant N] [--dry]   여러 개면 병렬(기본 3)
+ *   npm run publish -- --all [--dry]                              approved 전부, approved_variant 사용
  *   npm run token:refresh               long-lived 토큰 갱신 (60일)
  *   npm run limit                       남은 발행 쿼터
  */
@@ -119,32 +120,31 @@ function tier(posts: Post[]) {
 
 /* ------------------------------------------------------------- publish */
 
-async function publish(draftId: string, variantIdx: number, dry: boolean) {
-  const drafts = await readJson<any[]>("drafts.json", []);
-  const d = drafts.find((x) => x.id === draftId);
-  if (!d) throw new Error(`draft 없음: ${draftId}`);
-  if (d.status !== "approved") throw new Error(`status가 approved 아님: ${d.status}`);
+type PubResult = { id: string; ids: string[]; variantIdx: number };
 
+/** 한 초안 발행 (drafts.json 은 건드리지 않음 — 호출자가 모아서 씀) */
+async function publishOne(d: any, variantIdx: number, dry: boolean): Promise<PubResult | null> {
+  if (d.status !== "approved") throw new Error(`${d.id}: status가 approved 아님: ${d.status}`);
   const v = d.variants[variantIdx];
-  if (!v) throw new Error(`variant ${variantIdx} 없음`);
+  if (!v) throw new Error(`${d.id}: variant ${variantIdx} 없음`);
   // pages 가 있으면 1장 = 본문, 2장~ = 답글 스레드
   const link = process.env.LOVEREBBIT_LINK ?? "";
   const raw: string[] = Array.isArray(v.pages) ? v.pages : [v.text];
   if (raw.some((p) => p.includes("{{LINK}}")) && !link) {
-    throw new Error("본문에 {{LINK}} 가 있는데 LOVEREBBIT_LINK 가 비어 있음. .env.loverebbit 확인.");
+    throw new Error(`${d.id}: 본문에 {{LINK}} 가 있는데 LOVEREBBIT_LINK 가 비어 있음. .env.loverebbit 확인.`);
   }
   const pages: string[] = raw.map((p) => p.replaceAll("{{LINK}}", link));
-  if (!pages.length || !pages[0]) throw new Error(`variant ${variantIdx} 본문 없음`);
+  if (!pages.length || !pages[0]) throw new Error(`${d.id}: variant ${variantIdx} 본문 없음`);
   pages.forEach((p, i) => {
-    if (p.length > 500) throw new Error(`${i + 1}장 ${p.length}자 — 500자 초과`);
+    if (p.length > 500) throw new Error(`${d.id}: ${i + 1}장 ${p.length}자 — 500자 초과`);
     console.log(`
---- ${i + 1}/${pages.length} · ${p.length}자 ---
+--- ${d.id} ${i + 1}/${pages.length} · ${p.length}자 ---
 ${p}
 ---`);
   });
-  if (dry) return console.log("dry run. 발행 안 함.");
+  if (dry) return null;
 
-  // 2단계 컨테이너 모델 (답글은 reply_to_id 로 이어붙임)
+  // 2단계 컨테이너 모델 (답글은 reply_to_id 로 이어붙임). 한 초안 안에서는 순차.
   const ids: string[] = [];
   for (const [i, p] of pages.entries()) {
     const reply = i === 0 ? "" : `&reply_to_id=${ids[i - 1]}`;
@@ -155,18 +155,65 @@ ${p}
     await new Promise((r) => setTimeout(r, 3000)); // 컨테이너 처리 대기
     const pub = await api(`/me/threads_publish?creation_id=${c.id}`, { method: "POST" });
     ids.push(pub.id);
-    console.log(`${i + 1}/${pages.length} 발행: ${pub.id}`);
+    console.log(`${d.id} ${i + 1}/${pages.length} 발행: ${pub.id}`);
   }
+  return { id: d.id, ids, variantIdx };
+}
 
-  d.status = "published";
-  d.published_id = ids[0];
-  if (ids.length > 1) d.published_reply_ids = ids.slice(1);
-  d.published_at = new Date().toISOString();
-  d.published_variant = variantIdx;
-  await writeJson("drafts.json", drafts);
+/**
+ * 여러 초안 병렬 발행. ids 가 비고 all=true 면 approved 전부.
+ * 동시 실행은 concurrency 개까지 (API 레이트리밋 보호). 결과는 마지막에 한 번만 저장.
+ */
+async function publish(ids: string[], variantIdx: number, dry: boolean, all: boolean, concurrency = 3) {
+  const drafts = await readJson<any[]>("drafts.json", []);
+  const targets = all
+    ? drafts.filter((x) => x.status === "approved")
+    : ids.map((id) => {
+        const d = drafts.find((x) => x.id === id);
+        if (!d) throw new Error(`draft 없음: ${id}`);
+        return d;
+      });
+  if (!targets.length) throw new Error(all ? "approved 초안 없음" : "발행할 draft-id 없음");
+  console.log(`대상 ${targets.length}건: ${targets.map((t) => t.id).join(", ")}${dry ? " (dry)" : ""}`);
 
-  console.log(`발행 완료: ${ids[0]}`);
+  const results: PubResult[] = [];
+  const failed: string[] = [];
+  let cursor = 0;
+  const worker = async () => {
+    while (cursor < targets.length) {
+      const d = targets[cursor++];
+      const vi = all ? (d.approved_variant ?? 0) : variantIdx;
+      try {
+        const r = await publishOne(d, vi, dry);
+        if (r) results.push(r);
+      } catch (e: any) {
+        failed.push(d.id);
+        console.error(`실패 ${d.id}: ${e.message}`);
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, targets.length) }, worker));
+
+  if (dry) return console.log("dry run. 발행 안 함.");
+
+  // 발행 성공분만 갱신 — 다른 프로세스가 그 사이 바꿨을 수 있으니 다시 읽고 병합
+  const fresh = await readJson<any[]>("drafts.json", []);
+  const now = new Date().toISOString();
+  for (const r of results) {
+    const d = fresh.find((x) => x.id === r.id);
+    if (!d) continue;
+    d.status = "published";
+    d.published_id = r.ids[0];
+    if (r.ids.length > 1) d.published_reply_ids = r.ids.slice(1);
+    d.published_at = now;
+    d.published_variant = r.variantIdx;
+  }
+  await writeJson("drafts.json", fresh);
+
+  console.log(`\n발행 완료 ${results.length}건${failed.length ? `, 실패 ${failed.length}건 (${failed.join(", ")})` : ""}`);
+  results.forEach((r) => console.log(`  ${r.id}: ${r.ids[0]}`));
   console.log("72시간 뒤 npm run sync 로 성과 회수할 것.");
+  if (failed.length) process.exitCode = 1;
 }
 
 /* --------------------------------------------------------------- misc */
@@ -199,11 +246,18 @@ const run = {
   sync,
   limit,
   refresh,
-  publish: () => publish(rest[0], Number(val("--variant", "0")), flag("--dry")),
+  publish: () =>
+    publish(
+      rest.filter((a, i) => !a.startsWith("--") && rest[i - 1] !== "--variant" && rest[i - 1] !== "--concurrency"),
+      Number(val("--variant", "0")),
+      flag("--dry"),
+      flag("--all"),
+      Number(val("--concurrency", "3"))
+    ),
 }[cmd ?? ""];
 
 if (!run) {
-  console.log("usage: sync | publish <draft-id> [--variant N] [--dry] | limit | refresh");
+  console.log("usage: sync | publish <draft-id> [<draft-id> ...] [--all] [--variant N] [--concurrency N] [--dry] | limit | refresh");
   process.exit(1);
 }
 

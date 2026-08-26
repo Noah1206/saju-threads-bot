@@ -43,7 +43,7 @@ data/corpus/                    벤치마크 원문 보관 (append only, 정제 
 | 아이디어 | `/ideate` | data/ideas.json |
 | 초안 | `/draft` | data/drafts.json (아이디어당 3안) |
 | 검수 | `/review` | 블라인드 테스트 + 금지어 검사 |
-| 발행 | `npm run publish -- <draft-id>` | Threads |
+| 발행 | `npm run publish -- <id> [<id> ...]` 또는 `--all` (approved 전부, 병렬 3) | Threads |
 | 회수 | `npm run sync` (발행 72h 후) | 성과 라벨 갱신 |
 
 ## 월 1회 유지보수
