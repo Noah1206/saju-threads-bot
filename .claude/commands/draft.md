@@ -13,7 +13,8 @@ description: 아이디어를 threads-voice 말투로 초안 3안 생성
 1. few-shots 중 구조가 가까운 3개를 고르고 **어떤 걸 골랐는지 밝힌다**
 2. 3안 생성 — 서로 앵글이 달라야 한다
 3. 각 안에 SKILL.md 의 자체 검사 체크리스트를 실제로 돌리고 결과를 표시한다
-   - 연도·간지·합충·십신이 들어간 안은 `data/reference/seun.md` 표와 대조한 결과를 안별로 표시 (필수)
+   - **`node scripts/check-draft.mjs "<본문>"` 를 안마다 실제로 실행**하고 출력을 그대로 붙인다 (필수).
+     FAIL 이면 그 안은 폐기하고 다시 쓴다. 해석 경계는 `data/reference/claims.md` 참조
 4. 체크 실패 항목이 있으면 출력하지 말고 다시 쓴다
 
 ## 출력

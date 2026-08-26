@@ -15,7 +15,8 @@ WIN/LOSS 대조가 안 된 상태다. 내 계정 성과 데이터가 쌓이면
 3. **금지어 리스트를 어기면 그 초안은 버린다.** 생성 후 자체 검사한다.
 4. 500자 초과 금지 (Threads API 텍스트 상한).
 5. **간지·합충·십신은 기억으로 쓰지 않는다.** 연도·월·띠·합/충/원진/삼합·십신이 글에 들어가면 반드시
-   `data/reference/seun.md` 와 대조한다 (`node scripts/lookup.mjs <지지|일간> <연도>` 로 필요한 줄만).
+   `node scripts/check-draft.mjs "<본문>"` 로 기계 검사한다. FAIL 이면 폐기.
+   해석의 경계(유파 갈림·금지 화법)는 `data/reference/claims.md`. 표 조회는 `node scripts/lookup.mjs <지지|일간> <연도>`.
    2026-08-26 "내년 자축합" 오류(정미년은 자미 원진) 로 댓글 지적받음.
 
 ## 톤 — 압축체 고정
@@ -34,6 +35,7 @@ scripts/gen-reference.mjs       data/reference/seun.md 재생성
 scripts/import-draft.mjs        inbox/*.txt (웹 챗 초안) -> data/drafts.json
 scripts/build-webpack.mjs       claude.ai Project 용 지식 팩 -> dist/
 scripts/drafts.mjs              drafts/posts 발췌 조회 (summary|list|pending|show|grep|posts)
+scripts/check-draft.mjs         초안 명리 주장 기계 검사 (연도·합충·십신·시점·금지화법)
 data/drafts.json                초안 + 발행 이력 — 통째로 Read 금지(권한에서 차단). drafts.mjs 로 볼 것
 data/posts.json                 내 글 + 성과 (sync 로 갱신)
 data/ideas.json                 아이디어 풀
@@ -41,6 +43,7 @@ data/products.md                상품 13종 URL — 답글은 주제에 맞는 
 data/sources.md                 소재 인풋
 data/corpus/                    벤치마크 원문 (append only, 정제 금지)
 data/reference/seun.md          세운·지지·십신 참조표 (자동 생성)
+data/reference/claims.md        확정/해석자유/유파갈림/금지 경계 — 사람 판단 영역
 data/archive/                   구 fitpick_00 발행 목록 .md (소재 중복 방지용 20줄. 원문은 git 이력)
 inbox/                          웹 챗에서 뽑은 초안 .txt 임시 보관
 ```
