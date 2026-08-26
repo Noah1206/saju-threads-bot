@@ -4,8 +4,11 @@
 GitHub: https://github.com/Noah1206/saju-threads-bot (비공개, 비밀값 제외)
 
 ## 0. 노트북 + OneDrive (가장 쉬움 — 2026-08-27 포항)
-1. OneDrive 같은 계정 로그인 -> Desktopsaju-threads-bot 이 .env 포함 내려옴 (git clone 불필요)
-2. SETUP_LAPTOP.bat 더블클릭 (Node·Git·Claude Code 설치 + .env 확인 + API 연결 확인을 한 번에)
+1. OneDrive 같은 계정 로그인 -> 폴더가 .env 포함 내려옴 (git clone 불필요)
+   - Mac: Finder 사이드바 OneDrive > Desktop > saju-threads-bot (경로 예: ~/Library/CloudStorage/OneDrive-Personal/Desktop/saju-threads-bot)
+   - Windows: Desktopsaju-threads-bot
+2. Mac: 터미널에서 폴더로 이동 후  bash setup-mac.sh  /  Windows: SETUP_LAPTOP.bat 더블클릭
+   (Homebrew·Node·Git·Claude Code 설치 + .env 확인 + API 연결 확인을 한 번에)
 3. 폴더에서 claude 실행 -> "SETUP.md 보고 연결 확인해줘"
 주의: 두 PC 동시에 열지 말 것 (OneDrive 충돌 사본). 세션 끝에 git push.
 
