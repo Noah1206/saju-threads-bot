@@ -222,11 +222,17 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
     "approved_at": "2026-08-26",
     "note": "9/8 정유월 진입 후 발행",
-    "product": "yeonae"
+    "product": "yeonae",
+    "published_id": "18157198480503208",
+    "published_reply_ids": [
+      "17989951266041274"
+    ],
+    "published_at": "2026-08-26T07:24:31.858Z",
+    "published_variant": 0
   },
   {
     "id": "lr-010",
