@@ -3,7 +3,13 @@
 원본 PC: C:Usersab409OneDriveDesktopsaju-threads-bot (OneDrive 동기화됨 — 다른 Windows PC에 OneDrive 로그인하면 .env 포함 그대로 열림)
 GitHub: https://github.com/Noah1206/saju-threads-bot (비공개, 비밀값 제외)
 
-## 1. 코드 받기
+## 0. 노트북 + OneDrive (가장 쉬움 — 2026-08-27 포항)
+1. OneDrive 같은 계정 로그인 -> Desktopsaju-threads-bot 이 .env 포함 내려옴 (git clone 불필요)
+2. Node 22 (nodejs.org LTS), Git (git-scm.com), Claude Code 설치
+3. 폴더에서 claude 실행 -> "SETUP.md 보고 연결 확인해줘"
+주의: 두 PC 동시에 열지 말 것 (OneDrive 충돌 사본). 세션 끝에 git push.
+
+## 1. 코드 받기 (OneDrive 없을 때)
 git clone https://github.com/Noah1206/saju-threads-bot && cd saju-threads-bot   (Node >= 22.9, npm install 불필요)
 
 ## 2. 비밀값 넣기 — 둘 중 하나
