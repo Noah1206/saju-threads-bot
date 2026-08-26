@@ -7,7 +7,7 @@ description: 아이디어를 threads-voice 말투로 초안 3안 생성
 인자로 idea-id 를 받는다. 없으면 `data/ideas.json` 목록 보여주고 고르게 한다.
 
 ## 필수
-`.claude/skills/threads-voice/` 전체를 먼저 로드한다. voice-profile 이 EMPTY 면 중단.
+`.claude/skills/threads-voice/SKILL.md` 의 로드 순서대로만 읽는다 (voice-profile + few-shots 1부. banned/이력/2부/seun.md 전체는 읽지 않음). voice-profile 이 EMPTY 면 중단.
 
 ## 절차
 1. few-shots 중 구조가 가까운 3개를 고르고 **어떤 걸 골랐는지 밝힌다**

@@ -5,11 +5,13 @@ description: 사용자의 Threads 말투로 글을 쓰거나 초안을 검수할
 
 # threads-voice
 
-## 로드 순서 (건너뛰지 말 것)
+## 로드 순서 (건너뛰지 말 것 — 단, 아래 것만. 토큰 절약)
 
-1. `references/voice-profile.md` — 규칙
-2. `references/few-shots.md` — 실제 성공 글 원문
-3. `references/banned.md` — 금지어
+1.  — 규칙 12개 (이력은 voice-history.md, 규칙 갱신 때만)
+2.  — 압축체 원문 7건 (2부 구조 레퍼런스는 few-shots-structure.md, 매트릭스·띠타겟·시의성처방 포맷 쓸 때만)
+3.  는 **읽지 않는다** — 검사는 스크립트로 (아래 자체 검사 참조)
+4. 명리 사실은  를 통째로 읽지 말고  로 필요한 줄만
+5.  은 통째로 Read 금지 — node 로 필요한 id 만 발췌
 
 **few-shots 가 규칙보다 우선한다.** 규칙과 예시가 충돌하면 예시를 따른다.
 규칙은 예시에서 못 읽히는 부분만 보조한다.
@@ -32,7 +34,7 @@ description: 사용자의 Threads 말투로 글을 쓰거나 초안을 검수할
 ## 자체 검사 (출력 전 무조건)
 
 - [ ] 500자 이하
-- [ ] banned.md 단어 0개
+- [ ] banned.md 단어 0개 — `node -e` 로 banned.md 를 읽어 includes 검사 (파일을 컨텍스트에 올리지 말 것)
 - [ ] 종결어미 비율이 voice-profile 분포 안에 있는가
 - [ ] 문장 길이 분포가 few-shots 와 비슷한가 (긴 문장만 늘어놓지 않았는가)
 - [ ] 줄바꿈 리듬이 few-shots 와 같은가
