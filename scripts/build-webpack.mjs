@@ -5,7 +5,7 @@ const r = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const R = ".claude/skills/threads-voice/references/";
 mkdirSync(new URL("../dist/", import.meta.url), { recursive: true });
 
-const pack = `# saju-threads-bot 웹 챗 지식 팩 (자동 생성 — 원본은 GitHub Noah1206/saju-threads-bot)
+const pack = `# saju-threads-bot 웹 챗 지식 팩 (자동 생성 — 원본은 GitHub 22500698/saju-threads-bot)
 
 > 이 파일은 Claude Code 없이 claude.ai Project 에서 같은 품질의 초안을 뽑기 위한 것.
 > 발행·성과 회수는 여기서 못 한다. 초안 -> Threads 앱 복붙 -> 답글에 상품 링크.
