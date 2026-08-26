@@ -41,6 +41,22 @@ ${r(".claude/commands/draft.md")}
 ---
 # H. /review 커맨드
 ${r(".claude/commands/review.md")}
+
+---
+# I. /ideate 커맨드 (소재는 J 에서만)
+${r(".claude/commands/ideate.md")}
+
+---
+# J. 소재 인풋 (sources.md)
+${r("data/sources.md")}
+
+---
+# K. /voice-extract 커맨드 (말투 갱신 — 결과는 Claude Code 세션에서 voice-profile.md 에 반영)
+${r(".claude/commands/voice-extract.md")}
+
+---
+# L. 재회 소재 패턴 (patterns/jaehoe.md)
+${r("data/patterns/jaehoe.md")}
 `;
 writeFileSync(new URL("../dist/claude-web-project-pack.md", import.meta.url), pack);
 
