@@ -35,18 +35,13 @@ for /f "tokens=*" %%v in ('claude --version 2^>nul') do echo claude %%v
 
 echo === 4/5 Secrets ===
 if not exist ".env" (
-  echo [X] .env missing. Copy .env.example to .env and fill tokens. See SETUP.md
+  echo [X] .env missing. Copy .env.example to .env and fill token. See SETUP.md
   set MISSING=1
 ) else ( echo [OK] .env )
-if not exist ".env.loverebbit" (
-  echo [X] .env.loverebbit missing. Copy .env.loverebbit.example and fill token.
-  set MISSING=1
-) else ( echo [OK] .env.loverebbit )
 if defined MISSING ( pause & exit /b 1 )
 
 echo === 5/5 API check ===
-call npm run limit --silent 2>nul | findstr quota_total >nul && echo [OK] fitpick_00 token works || echo [X] fitpick_00 token failed
-call npm run limit:lr --silent 2>nul | findstr quota_total >nul && echo [OK] loverebbit token works || echo [X] loverebbit token failed
+call npm run limit --silent 2>nul | findstr quota_total >nul && echo [OK] loverebbit token works || echo [X] token failed - check .env
 
 echo.
 echo Done. Now run:  claude

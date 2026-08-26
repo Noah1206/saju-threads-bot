@@ -25,13 +25,11 @@ echo "[OK] claude $(claude --version 2>/dev/null | head -1)"
 
 echo "=== 4/5 Secrets ==="
 MISSING=0
-[ -f .env ]           && echo "[OK] .env"           || { echo "[X] .env missing -> cp .env.example .env and fill tokens (SETUP.md)"; MISSING=1; }
-[ -f .env.loverebbit ] && echo "[OK] .env.loverebbit" || { echo "[X] .env.loverebbit missing -> cp .env.loverebbit.example .env.loverebbit"; MISSING=1; }
+[ -f .env ] && echo "[OK] .env" || { echo "[X] .env missing -> cp .env.example .env and fill token (SETUP.md)"; MISSING=1; }
 [ "$MISSING" = 1 ] && exit 1
 
 echo "=== 5/5 API check ==="
-npm run limit    --silent 2>/dev/null | grep -q quota_total && echo "[OK] fitpick_00 token works"  || echo "[X] fitpick_00 token failed"
-npm run limit:lr --silent 2>/dev/null | grep -q quota_total && echo "[OK] loverebbit token works" || echo "[X] loverebbit token failed"
+npm run limit --silent 2>/dev/null | grep -q quota_total && echo "[OK] loverebbit token works" || echo "[X] token failed - check .env"
 
 echo
 echo "Done. Now run:  claude"

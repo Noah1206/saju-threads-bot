@@ -1,9 +1,8 @@
-// 웹 챗(claude.ai)에서 뽑은 초안을 drafts.json 에 넣는다. 승인된 안 1개 = 파일 1개.
+// 웹 챗(claude.ai)에서 뽑은 초안을 data/drafts.json 에 넣는다. 승인된 안 1개 = 파일 1개.
 //
-//   node scripts/import-draft.mjs inbox/xxx.txt                 -> data/drafts.json (fitpick)
-//   node scripts/import-draft.mjs inbox/xxx.txt --lr            -> data/loverebbit/drafts.json
-//   node scripts/import-draft.mjs inbox/xxx.txt --lr --product jaehoe   답글에 상품 링크 자동
-//   node scripts/import-draft.mjs inbox/                         폴더면 안의 .txt 전부 (처리 후 .done 으로 이름 변경)
+//   node scripts/import-draft.mjs inbox/xxx.txt
+//   node scripts/import-draft.mjs inbox/xxx.txt --product jaehoe    답글에 상품 링크 자동
+//   node scripts/import-draft.mjs inbox/                            폴더면 안의 .txt 전부 (처리 후 .done)
 //
 // 파일 형식: 본문 그대로. 답글(2/2)을 직접 쓰려면 본문 뒤에 "=====" 한 줄 넣고 그 아래에.
 // 첫 줄이 "# 메모:" 로 시작하면 hook_type 메모로 저장하고 본문에서 뺀다.
@@ -13,10 +12,9 @@ import { join } from "node:path";
 const args = process.argv.slice(2);
 const target = args.find((a) => !a.startsWith("--"));
 if (!target) { console.log(readFileSync(new URL(import.meta.url), "utf8").split("\n").slice(1, 10).join("\n")); process.exit(1); }
-const lr = args.includes("--lr");
 const product = args.includes("--product") ? args[args.indexOf("--product") + 1] : null;
-const file = lr ? "data/loverebbit/drafts.json" : "data/drafts.json";
-const prefix = lr ? "lr-" : "draft-";
+const file = "data/drafts.json";
+const prefix = "lr-";
 const PRODUCTS = { sokgunghap: "속궁합", jaehoe: "재회 사주", ibyeol: "이별 사주", bamgijil: "자신의 연애 사주", baramgi: "바람기 사주", gyeolhon: "결혼 사주", gwontaegi: "권태기 사주", hwanseung: "환승 사주", yeonae: "올해의 연애운", bimil: "비밀연애 사주", dohwasal: "도화살 사주", sseom: "썸 사주", jjak: "짝사랑 사주" };
 if (product && !PRODUCTS[product]) { console.error("상품 slug 없음:", product, "->", Object.keys(PRODUCTS).join(" ")); process.exit(1); }
 
@@ -50,4 +48,4 @@ for (const f of files) {
   added++;
 }
 writeFileSync(file, JSON.stringify(drafts, null, 2) + "\n");
-console.log(`${added}건 -> ${file}. 발행: npm run publish${lr ? ":lr" : ""} -- --all`);
+console.log(`${added}건 -> ${file}. 발행: npm run publish -- --all`);

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Threads API CLI — 의존성 없음 (node 20+ / 내장 fetch)
+ * Threads API CLI — @loverebbit 전용. 의존성 없음 (node 22+ / 내장 fetch)
  *
- *   npm run sync                        내 글 + 인사이트 수집 → data/posts.json
+ *   npm run sync                        내 글 + 인사이트 수집 -> data/posts.json
  *   npm run publish -- <draft-id> [<draft-id> ...] [--variant N] [--dry]   여러 개면 병렬(기본 3)
- *   npm run publish -- --all [--dry]                              approved 전부, approved_variant 사용
+ *   npm run publish -- --all [--dry]    approved 전부, approved_variant 사용
  *   npm run token:refresh               long-lived 토큰 갱신 (60일)
  *   npm run limit                       남은 발행 쿼터
  */

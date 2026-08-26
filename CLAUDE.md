@@ -1,8 +1,9 @@
 # saju-threads-bot
 
-내 Threads 계정 운영 자동화. 수집 → 아이디어 → 초안 → 승인 → 발행 → 성과 회수 루프.
+**@loverebbit 전용.** LOVEREBBIT 사주 웹앱 마케팅 계정 운영 자동화.
+수집 → 아이디어 → 초안 → 승인 → 발행 → 성과 회수 루프.
 
-**니치: 사주·명리 콘텐츠** (2026-08-24 전환). 말투 기준은 벤치마크 스와이프 코퍼스
+**니치: 사주·명리 콘텐츠.** 말투 기준은 벤치마크 스와이프 코퍼스
 `data/corpus/2026-08-24-saju-20.md` 에서 추출됨 — 조회수 없는 남의 글 20건이라
 WIN/LOSS 대조가 안 된 상태다. 내 계정 성과 데이터가 쌓이면
 `/voice-extract --update` 로 실측 기반으로 갈아탈 것.
@@ -14,28 +15,50 @@ WIN/LOSS 대조가 안 된 상태다. 내 계정 성과 데이터가 쌓이면
 3. **금지어 리스트를 어기면 그 초안은 버린다.** 생성 후 자체 검사한다.
 4. 500자 초과 금지 (Threads API 텍스트 상한).
 5. **간지·합충·십신은 기억으로 쓰지 않는다.** 연도·월·띠·합/충/원진/삼합·십신이 글에 들어가면 반드시
-   `data/reference/seun.md` (`node scripts/gen-reference.mjs` 로 생성) 와 대조한다. loverebbit 계정도 동일.
-   2026-08-26 lr-023/030 "내년 자축합" 오류(정미년은 자미 원진) 로 댓글 지적받음 — 정정 답글로 수습.
+   `data/reference/seun.md` 와 대조한다 (`node scripts/lookup.mjs <지지|일간> <연도>` 로 필요한 줄만).
+   2026-08-26 "내년 자축합" 오류(정미년은 자미 원진) 로 댓글 지적받음.
+
+## 톤 — 압축체 고정
+
+**~함 / ~임 / ~됨 / 명사종결.** 존대체·반말 구어 금지.
+2026-08-26 에 존대체로 10편 올렸다가 전부 압축체로 재발행함. 계정 톤은 압축체 하나다.
 
 ## 디렉토리
 
 ```
-.claude/skills/threads-voice/   말투 스킬 (voice-profile, few-shots)
+.claude/skills/threads-voice/   말투 스킬 (voice-profile, few-shots, banned)
 .claude/commands/               /voice-extract /ideate /draft /review
-scripts/threads.ts              Threads API CLI (sync/insights/publish/token)
+scripts/threads.ts              Threads API CLI (sync/publish/limit/refresh)
+scripts/lookup.mjs              세운·지지 참조표 부분 조회 (표 전체를 읽지 말 것)
+scripts/gen-reference.mjs       data/reference/seun.md 재생성
+scripts/import-draft.mjs        inbox/*.txt (웹 챗 초안) -> data/drafts.json
+scripts/build-webpack.mjs       claude.ai Project 용 지식 팩 -> dist/
+data/drafts.json                초안 + 발행 이력
 data/posts.json                 내 글 + 성과 (sync 로 갱신)
 data/ideas.json                 아이디어 풀
-data/drafts.json                승인 대기 초안
-data/sources.md                 소재 인풋 (신살·십신 소재, 시의성 이벤트, 상담 사례)
-data/corpus/                    벤치마크 원문 보관 (append only, 정제 금지)
+data/products.md                상품 13종 URL — 답글은 주제에 맞는 상품 페이지로 연결
+data/sources.md                 소재 인풋
+data/corpus/                    벤치마크 원문 (append only, 정제 금지)
+data/reference/seun.md          세운·지지·십신 참조표 (자동 생성)
+data/archive/                   구 fitpick_00 계정 발행 이력 (참고용, 소재 중복 방지)
+inbox/                          웹 챗에서 뽑은 초안 .txt 임시 보관
 ```
+
+## 글 구조 — 본문 + 2/2 답글
+
+`variants[].pages = [본문, 답글]`. pages 가 있으면 2장~ 는 `reply_to_id` 로 이어붙는다.
+
+- 본문 끝: 댓글 질문 한 줄 + 해시태그 ≤3. **본문에 URL 넣지 않는다** (도달 깎임).
+- 2/2 답글: 주제에 맞는 상품 URL + "생년월일만 넣으면 됨".
+- **연애·재회·궁합 소재만 상품 링크.** 돈·직업·띠 소재는 답글 없이 본문만.
+- `{{LINK}}` 플레이스홀더를 쓰면 `LOVEREBBIT_LINK` 로 치환 (비어 있으면 발행 거부). 상품별 URL 직접 기입이 기본.
 
 ## 발행 규칙
 
-- **정서군 간격**: 같은 정서군(예: "억울하게 안 풀리는 나" — ideas.json 의 `cluster` 필드)
-  글은 연달아 올리지 않는다. 최소 2~3편 간격, 사이에 다른 결(돈·반박·시의성)을 끼운다.
-  연달면 서로 잡아먹고 계정 톤이 징징으로 굳는다.
+- **정서군 간격**: 같은 정서군(ideas.json 의 `cluster` 필드) 글은 연달아 올리지 않는다.
+  최소 2~3편 간격, 사이에 다른 결(돈·반박·시의성)을 끼운다.
 - 시한부 소재(`deadline` 필드)는 점수보다 만료가 우선한다.
+- 하루 1~2편. 한 번에 몰아 올리면 서로 노출을 잡아먹고 성과 비교가 불가능해진다.
 
 ## 파이프라인
 
@@ -49,24 +72,21 @@ data/corpus/                    벤치마크 원문 보관 (append only, 정제 
 | 발행 | `npm run publish -- <id> [<id> ...]` 또는 `--all` (approved 전부, 병렬 3) | Threads |
 | 회수 | `npm run sync` (발행 72h 후) | 성과 라벨 갱신 |
 
+웹 챗(claude.ai)에서 쓴 초안은 `inbox/` 에 .txt 로 넣고
+`node scripts/import-draft.mjs inbox/ --product <slug>` → `npm run publish -- --all`.
+
+## 계정·토큰
+
+`@loverebbit` (user_id `27988053430851129`). 토큰은 `.env` 의 `THREADS_ACCESS_TOKEN`,
+**만료 2026-10-17**. 자동갱신 대상이 아니므로 만료 전 `npm run token:refresh` 필수.
+토큰 재발급은 Meta 콘솔 "사용자 토큰 생성기" (자동화 불가, 사람이 직접 클릭).
+
+## 발행 이력
+
+2026-08-26: lr-001~031 (31편). 존대체 10편(lr-001~010)은 압축체 lr-022~031 로 재발행됨.
+lr-032(바람기) 는 pending. 성과 회수는 `npm run sync` 로 08-29 이후.
+
 ## 월 1회 유지보수
 
 `npm run sync` 후 상위 20% / 하위 20% 재분류 → `/voice-extract --update` 로 voice-profile 갱신.
 이 루프를 돌리지 않으면 그냥 글 생성기다.
-
-## loverebbit 계정 (2026-08-26 추가)
-
-`@loverebbit` (LOVEREBBIT 사주 웹앱 마케팅) 은 **별도 계정·별도 톤**이다. threads-voice 압축체 적용 안 함 —
-따뜻한 존대체, 5~10줄, 본문 끝 댓글 질문 + 해시태그 ≤3, **2/2 답글에 상품 URL** 구조.
-
-```
-.env.loverebbit              토큰(claude/threads_token_loverabbit.json 복사, 만료 2026-10-17) + DATA_DIR=data/loverebbit/
-npm run publish:lr -- lr-001 --variant 0 [--dry]     sync:lr / limit:lr / token:refresh:lr 동일
-data/loverebbit/drafts.json  variants[].pages = [본문, 답글]  (pages 가 있으면 2장~ 는 reply_to_id 로 이어붙임)
-data/loverebbit/products.md  상품 13종 URL — 답글은 주제에 맞는 상품 페이지로 연결
-```
-
-- 토큰은 스케줄러 자동갱신 대상이 아님. 갱신되면 `.env.loverebbit` 에 다시 복사.
-- `{{LINK}}` 플레이스홀더를 쓰면 `LOVEREBBIT_LINK` 로 치환 (비어 있으면 발행 거부). 현재 초안은 URL 직접 기입.
-- 발행 이력: 2026-08-26 lr-001(재회), lr-007(속궁합), lr-011~021(사주봇 draft-010~020 크로스포스트, 연애 소재 6편만 링크 답글). lr-009 도 08-26 발행 (--all 테스트). 승인 대기 0건.
-- 크로스포스트 규칙: 연애·재회·궁합 소재만 상품 링크 답글, 돈·직업·띠 소재는 답글 없이 본문만.
