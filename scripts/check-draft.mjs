@@ -80,9 +80,16 @@ export function check(text) {
     else FAIL.push(`${claim} -> 천간합은 ${STEM_HAP.join("·")}, 충은 ${STEM_CHUNG.join("·")}`);
   }
   // 3. 삼합 오행
-  for (const m of text.matchAll(new RegExp(`(신자진|해묘미|인오술|사유축)\\s*(?:삼합)?\\s*[(·)]?\\s*(${"목화토금수"}[)]?)?`, "g"))) {
-    const [, k, el] = m;
-    if (el) { const e = el.replace(")", ""); if (SAMHAP[k] !== e) FAIL.push(`${k}=${e} -> ${k} 는 ${SAMHAP[k]}`); else OK.push(`${k}(${e})`); }
+  for (const m of text.matchAll(new RegExp(`(신자진|해묘미|인오술|사유축)\\s*(?:삼합)?\\s*[(·=]?\\s*([목화토금수])(?:국|기운)?\\s*\\)?`, "g"))) {
+    const [, k, e] = m;
+    if (SAMHAP[k] !== e) FAIL.push(`${k}=${e} -> ${k} 는 ${SAMHAP[k]}`);
+    else OK.push(`${k} 삼합(${e})`);
+  }
+  // 3-2. 방합 오행
+  for (const m of text.matchAll(new RegExp(`(인묘진|사오미|신유술|해자축)\\s*(?:방합)?\\s*[(·=]?\\s*([목화토금수])(?:국|기운)?\\s*\\)?`, "g"))) {
+    const [, k, e] = m;
+    if (BANGHAP[k] !== e) FAIL.push(`${k}=${e} -> ${k} 는 ${BANGHAP[k]}`);
+    else OK.push(`${k} 방합(${e})`);
   }
   // 4. 연도 - 간지
   for (const m of text.matchAll(new RegExp(`(20\\d\\d)\\s*년?\\s*(${S})(${B})`, "g"))) {
@@ -108,7 +115,7 @@ export function check(text) {
     [/무조건\s*(재회|성공|잘됨|됨)/, "결과 보장"],
     [/100\s*%|백퍼|반드시\s*(옴|됨|함)|절대\s*(안|못)\s*\S+할\s*리\s*없/, "확률 단정"],
     [/(넘기면|안\s*보면|무시하면)\s*[^\n]{0,10}(불행|나빠|망|안\s*좋)/, "공포 조장"],
-    [/(암|불치|시한부|죽|사망|이혼하게\s*됨|파산함)/, "의료·중대사 단정"],
+    [/(암\s*진단|암에\s*걸|발암|불치|시한부|죽음|죽는다|죽어|사망|이혼하게\s*됨|파산함)/, "의료·중대사 단정"],
     [/사주\s*상\s*(반드시|무조건)/, "운명 단정"],
     [/\d[\d,]*\s*원(?!국|진|칙|래|본|인|형)/, "가격 노출"],
     [/할인|특가|반값|최저가|세일|쿠폰|선착순|오늘까지만|결제하면|무료/, "프로모션 문구"],
