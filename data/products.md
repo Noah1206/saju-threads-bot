@@ -16,4 +16,4 @@
 | sseom | 썸 사주 | https://loverebbit.xyz/product/sseom |
 | jjak | 짝사랑 사주 | https://loverebbit.xyz/product/jjak |
 
-게시물 답글(2/2)에는 주제에 맞는 상품 URL을 직접 넣는다. 무료 미리보기는 각 상품 페이지 안에서 시작.
+게시물 답글(2/2)에는 주제에 맞는 상품 URL을 직접 넣는다. 미리보기는 각 상품 페이지 안에서 시작.
