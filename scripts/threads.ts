@@ -33,6 +33,7 @@ type Post = {
   replies: number;
   reposts: number;
   quotes: number;
+  kind?: "post" | "reply";
   tier?: "WIN" | "MID" | "LOSS";
 };
 
@@ -57,21 +58,37 @@ const writeJson = (name: string, v: unknown) =>
 
 /* ---------------------------------------------------------------- sync */
 
-async function sync() {
-  const fields = "id,media_type,text,permalink,timestamp";
-  let url = `/me/threads?fields=${fields}&limit=100`;
-  const raw: any[] = [];
-
-  // 커서 페이지네이션
+/** 커서 페이지네이션으로 엔드포인트를 전부 긁는다. */
+async function collect(endpoint: string, fields: string) {
+  const out: any[] = [];
+  let url = `${endpoint}?fields=${fields}&limit=100`;
   while (url) {
     const page = await api(url);
-    raw.push(...(page.data ?? []));
+    out.push(...(page.data ?? []));
     const next: string | undefined = page.paging?.cursors?.after;
-    url = next ? `/me/threads?fields=${fields}&limit=100&after=${next}` : "";
-    if (raw.length > 2000) break; // 안전장치
+    url = next ? `${endpoint}?fields=${fields}&limit=100&after=${next}` : "";
+    if (out.length > 2000) break; // 안전장치
   }
+  return out;
+}
 
-  console.log(`글 ${raw.length}개 수집. 인사이트 붙이는 중...`);
+async function sync() {
+  const fields = "id,media_type,text,permalink,timestamp";
+
+  const mains = (await collect("/me/threads", fields)).map((p) => ({ ...p, kind: "post" as const }));
+  // /me/replies 는 threads_read_replies 권한이 있어야 200 을 준다 (2026-08-27 확보).
+  // 없으면 본문만 수집하고 계속 간다 — 답글 도달은 못 보지만 sync 자체는 살아 있어야 함.
+  let replies: any[] = [];
+  try {
+    replies = (await collect("/me/replies", fields)).map((p) => ({ ...p, kind: "reply" as const }));
+  } catch (e: any) {
+    console.log(`답글 수집 실패(권한 확인 필요): ${e.message.slice(0, 80)}`);
+  }
+  // 같은 id 가 양쪽에 오면 본문 쪽을 남긴다
+  const seen = new Set(mains.map((p) => p.id));
+  const raw = [...mains, ...replies.filter((p) => !seen.has(p.id))];
+
+  console.log(`본문 ${mains.length} + 답글 ${replies.length} = ${raw.length}개 수집. 인사이트 붙이는 중...`);
 
   const posts: Post[] = [];
   for (const p of raw) {
@@ -87,6 +104,7 @@ async function sync() {
       // 오래된 글은 인사이트가 없을 수 있음. 0으로 두고 tier 계산에서 빠짐.
     }
     posts.push({
+      kind: p.kind,
       id: p.id,
       text: p.text ?? "",
       permalink: p.permalink,
@@ -105,13 +123,21 @@ async function sync() {
   await writeJson("posts.json", posts);
 
   const n = (t: string) => posts.filter((p) => p.tier === t).length;
-  console.log(`저장 완료 — WIN ${n("WIN")} / MID ${n("MID")} / LOSS ${n("LOSS")}`);
+  const rep = posts.filter((p) => p.kind === "reply");
+  console.log(`저장 완료 — 본문 WIN ${n("WIN")} / MID ${n("MID")} / LOSS ${n("LOSS")}`);
+  if (rep.length) {
+    const rv = rep.map((p) => p.views).sort((a, b) => a - b);
+    const mainAvg = posts.filter((p) => p.kind !== "reply" && p.views > 0);
+    const avg = (a: number[]) => (a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length) : 0);
+    console.log(`답글 ${rep.length}건 — 평균 ${avg(rv)} / 중앙 ${rv[Math.floor(rv.length / 2)]} / 최고 ${rv.at(-1)}`);
+    console.log(`  본문 대비 도달률 ${(avg(rv) / Math.max(1, avg(mainAvg.map((p) => p.views))) * 100).toFixed(1)}%`);
+  }
   if (n("WIN") < 8) console.log("경고: WIN 표본 8개 미만. few-shots 품질 안 나온다.");
 }
 
-/** 조회수 기준 상하위 20% 라벨. 인사이트 없는 글(views=0)은 제외. */
+/** 조회수 기준 상하위 20% 라벨. 인사이트 없는 글과 답글은 제외 (답글은 도달 자체가 달라 같이 줄 세우면 안 됨). */
 function tier(posts: Post[]) {
-  const scored = posts.filter((p) => p.views > 0).sort((a, b) => b.views - a.views);
+  const scored = posts.filter((p) => p.views > 0 && p.kind !== "reply").sort((a, b) => b.views - a.views);
   const cut = Math.max(1, Math.floor(scored.length * 0.2));
   scored.forEach((p, i) => {
     p.tier = i < cut ? "WIN" : i >= scored.length - cut ? "LOSS" : "MID";
