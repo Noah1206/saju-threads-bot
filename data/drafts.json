@@ -1294,7 +1294,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "17877807738534537",
+    "published_reply_ids": [
+      "18209841289357720"
+    ],
+    "published_at": "2026-08-27T05:11:03.715Z",
+    "published_variant": 0
   },
   {
     "id": "lr-048",
@@ -1313,7 +1319,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "17880254874511330",
+    "published_reply_ids": [
+      "17884272771616468"
+    ],
+    "published_at": "2026-08-27T05:11:03.715Z",
+    "published_variant": 0
   },
   {
     "id": "lr-049",
@@ -1332,7 +1344,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18013479650925866",
+    "published_reply_ids": [
+      "18127167205689508"
+    ],
+    "published_at": "2026-08-27T05:11:03.715Z",
+    "published_variant": 0
   },
   {
     "id": "lr-050",
@@ -1351,7 +1369,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18139562839607834",
+    "published_reply_ids": [
+      "18380557822227310"
+    ],
+    "published_at": "2026-08-27T05:11:03.715Z",
+    "published_variant": 0
   },
   {
     "id": "lr-051",
@@ -1369,7 +1393,10 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18068259182751068",
+    "published_at": "2026-08-27T05:11:03.715Z",
+    "published_variant": 0
   },
   {
     "id": "lr-052",
@@ -1388,7 +1415,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18174554416436461",
+    "published_reply_ids": [
+      "18104376020462570"
+    ],
+    "published_at": "2026-08-27T05:11:23.628Z",
+    "published_variant": 0
   },
   {
     "id": "lr-053",
@@ -1407,7 +1440,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18110970878006384",
+    "published_reply_ids": [
+      "17878764171529437"
+    ],
+    "published_at": "2026-08-27T05:11:23.628Z",
+    "published_variant": 0
   },
   {
     "id": "lr-054",
@@ -1426,7 +1465,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "17942591088072160",
+    "published_reply_ids": [
+      "18091185455639540"
+    ],
+    "published_at": "2026-08-27T05:11:23.628Z",
+    "published_variant": 0
   },
   {
     "id": "lr-055",
@@ -1445,7 +1490,13 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "17939788728346662",
+    "published_reply_ids": [
+      "18114560698975504"
+    ],
+    "published_at": "2026-08-27T05:11:23.628Z",
+    "published_variant": 0
   },
   {
     "id": "lr-056",
@@ -1463,6 +1514,9 @@
         "checks_passed": true
       }
     ],
-    "status": "approved"
+    "status": "published",
+    "published_id": "18061505225780984",
+    "published_at": "2026-08-27T05:11:23.628Z",
+    "published_variant": 0
   }
 ]
