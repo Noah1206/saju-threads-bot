@@ -1,0 +1,26 @@
+{
+  "_주의": "슬롯만 채운다. 벤치마크 문장을 옮겨 적지 말 것 — content-review 가 8자 연속 일치를 잡는다.",
+  "zodiac": "닭",
+  "birthYears": [1969, 1981, 1993, 2005],
+  "topic": "career",
+  "emotion": "손이 한 번 멈췄다",
+  "timeWindow": "올해 하반기",
+  "visibleTrait": "빈틈이 없는 사람",
+  "hiddenStruggle": "남이 흘린 것까지 대신 정리하던 시간",
+  "concreteScenes": [
+    "회의 끝나고 남이 놓친 걸 혼자 다시 확인함",
+    "보내기 전 문장을 세 번 고쳐 읽고도 마음에 안 듦",
+    "내 공이 남 이름으로 올라가도 그 자리에서 말을 못 함"
+  ],
+  "saju": {
+    "branch": "유금",
+    "term": "유금",
+    "plain": "깎아서 정확하게 만드는 글자임. 빠르기보다 틀리지 않는 쪽으로 감"
+  },
+  "accumulated": "다듬어 온 정확도",
+  "practicalShift": "남 빈자리 메우기 전에 내 몫부터 이름 붙여 두기",
+  "summary": "일이 풀리는 자리가 어디 붙었는지 확인해볼 만함",
+  "productName": "직업 사주",
+  "productSlug": null,
+  "cta": "언제부터 흐름이 바뀌는지와 확인 기준"
+}

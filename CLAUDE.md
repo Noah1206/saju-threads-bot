@@ -37,6 +37,8 @@ scripts/import-draft.mjs        inbox/*.txt (웹 챗 초안) -> data/drafts.json
 scripts/build-webpack.mjs       claude.ai Project 용 지식 팩 -> dist/
 scripts/drafts.mjs              drafts/posts 발췌 조회 (summary|list|pending|show|grep|posts)
 scripts/check-draft.mjs         초안 명리 주장 기계 검사 (연도·합충·십신·시점·금지화법)
+scripts/carousel4.mjs           띠별 4장 캐러셀 생성 (briefs/*.json -> pages 4장 + 릴스 장면)
+scripts/content-review.mjs      캐러셀 화법·구조 검수 (보장/공포/부적/타계정 시그니처/원문복제/띠-연도)
 data/drafts.json                초안 + 발행 이력 — 통째로 Read 금지(권한에서 차단). drafts.mjs 로 볼 것
 data/posts.json                 내 글 + 성과 (sync 로 갱신)
 data/ideas.json                 아이디어 풀
@@ -46,6 +48,7 @@ data/corpus/                    벤치마크 원문 (append only, 정제 금지)
 data/reference/seun.md          세운·지지·십신 참조표 (자동 생성)
 data/reference/claims.md        확정/해석자유/유파갈림/금지 경계 — 사람 판단 영역
 data/archive/                   구 fitpick_00 발행 목록 .md (소재 중복 방지용 20줄. 원문은 git 이력)
+briefs/                         carousel4 입력 슬롯 .json (벤치마크 문장 복사 금지)
 inbox/                          웹 챗에서 뽑은 초안 .txt 임시 보관
 ```
 
