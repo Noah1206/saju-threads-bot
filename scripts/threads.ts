@@ -235,6 +235,45 @@ async function refresh() {
 
 /* ---------------------------------------------------------------- main */
 
+// 발행 취소. 되돌릴 수 없으므로 기본은 dry-run, 실제 삭제는 --yes 를 줘야 한다.
+// 초안의 pages 가 여러 장이면 답글까지 전부 지운다 (역순 — 답글 먼저).
+async function remove(ids: string[], yes: boolean) {
+  const drafts = await readJson<any[]>("drafts.json", []);
+  const targets = ids.map((id) => {
+    const d = drafts.find((x) => x.id === id);
+    if (!d) throw new Error(`초안 없음: ${id}`);
+    if (!d.published_id) throw new Error(`발행 이력 없음: ${id}`);
+    // 답글부터 지운다 (본문을 먼저 지우면 답글이 고아로 남음)
+    return { d, ids: [...(d.published_reply_ids ?? [])].reverse().concat(d.published_id) };
+  });
+  const total = targets.reduce((a, b) => a + b.ids.length, 0);
+  console.log(`대상 초안 ${targets.length}건 / 게시물 ${total}개${yes ? "" : "  (dry-run — 실제로 지우려면 --yes)"}`);
+
+  let done = 0, failed = 0;
+  for (const { d, ids: mids } of targets) {
+    for (const mid of mids) {
+      if (!yes) { console.log(`  [dry] ${d.id} ${mid}`); done++; continue; }
+      try {
+        await api(`/${mid}`, { method: "DELETE" });
+        console.log(`  삭제 ${d.id} ${mid}`);
+        done++;
+      } catch (e: any) {
+        console.error(`  실패 ${d.id} ${mid} :: ${e.message}`);
+        failed++;
+      }
+    }
+    if (yes && !failed) {
+      d.status = "deleted";
+      d.deleted_at = new Date().toISOString();
+      d.deleted_ids = [d.published_id, ...(d.published_reply_ids ?? [])];
+      delete d.published_id;
+      delete d.published_reply_ids;
+    }
+  }
+  if (yes) await writeJson("drafts.json", drafts);
+  console.log(`\n${yes ? "삭제" : "예정"} ${done}개 / 실패 ${failed}개`);
+}
+
 const [cmd, ...rest] = process.argv.slice(2);
 const flag = (n: string) => rest.includes(n);
 const val = (n: string, d: string) => {
@@ -254,10 +293,11 @@ const run = {
       flag("--all"),
       Number(val("--concurrency", "3"))
     ),
+  delete: () => remove(rest.filter((a) => !a.startsWith("--")), flag("--yes")),
 }[cmd ?? ""];
 
 if (!run) {
-  console.log("usage: sync | publish <draft-id> [<draft-id> ...] [--all] [--variant N] [--concurrency N] [--dry] | limit | refresh");
+  console.log("usage: sync | publish <draft-id> [...] [--all] [--variant N] [--concurrency N] [--dry] | delete <draft-id> [...] [--yes] | limit | refresh");
   process.exit(1);
 }
 
