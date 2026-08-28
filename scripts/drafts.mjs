@@ -9,7 +9,9 @@
 //   node scripts/drafts.mjs posts top 5     조회수 상위 5건 (id / 조회수 / 첫 줄)
 //   node scripts/drafts.mjs replies         2/2 답글 도달 (본문 대비 %, 상품별, 반말 CTA 대조)
 //   node scripts/drafts.mjs pairs           꺾쇠 재작성본 vs 원본 A/B (rewrite_of 쌍)
-import { readFileSync, existsSync } from "node:fs";
+//   node scripts/drafts.mjs copy 10 [--save data/top-posts.md]   상위 N편 원문(+답글) 복붙용
+import { readFileSync, existsSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 const read = (f) => (existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : []);
 const D = () => read("data/drafts.json");
 const P = () => read("data/posts.json");
@@ -123,4 +125,47 @@ if (cmd === "summary") {
   for (const [s, v] of Object.entries(bySlug).sort((x, y) => avg(y[1]) - avg(x[1]))) {
     console.log(`  ${s.padEnd(11)} ${String(v.length).padStart(2)}건  평균 ${avg(v)}`);
   }
-} else console.log(readFileSync(new URL(import.meta.url), "utf8").split("\n").slice(1, 11).join("\n"));
+} else if (cmd === "copy") {
+  // 조회수 상위 본문을 원문 그대로 뽑는다. 재활용·리포스트·웹챗 프롬프트에 붙여넣기용.
+  // 2/2 답글은 drafts.json 의 published_reply_ids 로 이어 붙인다 — posts.json 답글에는 부모 링크가 없다.
+  // 상위권에도 명리 오류가 든 글이 섞여 있으므로(2026-08-26 자축합) 편마다 check-draft 결과를 같이 찍는다.
+  const p = P(), d = D();
+  const main = p.filter((x) => x.kind !== "reply" && x.views > 0).sort((x, y) => y.views - x.views);
+  if (!main.length) { console.log("본문 없음. npm run sync 먼저."); process.exit(0); }
+  const byId = new Map(p.map((x) => [x.id, x]));
+  const draftOf = new Map(d.filter((x) => x.published_id).map((x) => [x.published_id, x]));
+  const n = Number(a) > 0 ? Number(a) : 10;
+  const day = (t) => new Date(t).toISOString().slice(5, 10);
+  const out = [
+    `# 조회수 상위 ${n}편 — @loverebbit (${new Date().toISOString().slice(0, 10)} 기준)`,
+    "",
+    "> 원문 그대로. **재활용 전 [명리] 줄을 볼 것** — FAIL 은 이미 틀린 주장이 들어간 글이다.",
+    "",
+  ];
+  for (const [i, x] of main.slice(0, n).entries()) {
+    const dr = draftOf.get(x.id);
+    const pages = [x.text, ...(dr?.published_reply_ids ?? []).map((r) => byId.get(r)?.text).filter(Boolean)];
+    let verdict;
+    try {
+      execFileSync("node", ["scripts/check-draft.mjs", pages.join("\n")], { encoding: "utf8" });
+      verdict = "PASS";
+    } catch (e) {
+      const why = (e.stdout ?? "").split("\n").filter((l) => l.includes("X")).map((l) => l.trim()).join(" / ");
+      verdict = "FAIL — " + (why || "사유는 check-draft 로 직접 확인");
+    }
+    out.push(`## ${i + 1}. ${x.views.toLocaleString()}뷰 · 좋아요 ${x.likes} · 댓글 ${x.replies} · ${day(x.timestamp)}${dr ? ` · ${dr.id}` : ""}`);
+    out.push(`[명리] ${verdict}`);
+    pages.forEach((t, j) => {
+      if (j) out.push("", `**답글 ${j}/${pages.length - 1}**`);
+      out.push("", "```", t, "```");
+    });
+    out.push("");
+  }
+  const txt = out.join("\n");
+  const s = process.argv.indexOf("--save");
+  if (s > -1) {
+    const f = process.argv[s + 1] && !process.argv[s + 1].startsWith("--") ? process.argv[s + 1] : "data/top-posts.md";
+    writeFileSync(f, txt + "\n");
+    console.log(`저장: ${f} — 상위 ${n}편`);
+  } else console.log(txt);
+} else console.log(readFileSync(new URL(import.meta.url), "utf8").split("\n").slice(1, 12).join("\n"));
