@@ -3208,9 +3208,15 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "18194597245383596",
+    "published_reply_ids": [
+      "18091281821216626"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   },
   {
     "id": "lr-122",
@@ -3228,9 +3234,15 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "18123723133793225",
+    "published_reply_ids": [
+      "18121538830676248"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   },
   {
     "id": "lr-123",
@@ -3274,9 +3286,15 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "18388257853161855",
+    "published_reply_ids": [
+      "18127044841776667"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   },
   {
     "id": "lr-125",
@@ -3294,9 +3312,15 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "18373055287236876",
+    "published_reply_ids": [
+      "18136638271596463"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   },
   {
     "id": "lr-126",
@@ -3340,9 +3364,15 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "18068104187754601",
+    "published_reply_ids": [
+      "18126086710705043"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   },
   {
     "id": "lr-128",
@@ -3360,8 +3390,14 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-29"
+    "approved_at": "2026-08-29",
+    "published_id": "17979303116901631",
+    "published_reply_ids": [
+      "18075146234390294"
+    ],
+    "published_at": "2026-08-29T14:48:14.534Z",
+    "published_variant": 0
   }
 ]
