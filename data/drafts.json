@@ -3182,8 +3182,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18104149499237340",
+    "published_reply_ids": [
+      "17918663772221251"
+    ],
+    "published_at": "2026-08-29T14:45:08.652Z",
+    "published_variant": 0
   },
   {
     "id": "lr-121",
@@ -3201,8 +3208,9 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   },
   {
     "id": "lr-122",
@@ -3220,8 +3228,9 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   },
   {
     "id": "lr-123",
@@ -3239,8 +3248,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18365340043211396",
+    "published_reply_ids": [
+      "18154245106507460"
+    ],
+    "published_at": "2026-08-29T14:45:08.652Z",
+    "published_variant": 0
   },
   {
     "id": "lr-124",
@@ -3258,8 +3274,9 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   },
   {
     "id": "lr-125",
@@ -3277,8 +3294,9 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   },
   {
     "id": "lr-126",
@@ -3296,8 +3314,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18016533437867636",
+    "published_reply_ids": [
+      "17986012476101157"
+    ],
+    "published_at": "2026-08-29T14:45:08.652Z",
+    "published_variant": 0
   },
   {
     "id": "lr-127",
@@ -3315,8 +3340,9 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   },
   {
     "id": "lr-128",
@@ -3334,7 +3360,8 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29"
   }
 ]
