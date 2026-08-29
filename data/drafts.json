@@ -2948,8 +2948,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18151864300519843",
+    "published_reply_ids": [
+      "17942429733306943"
+    ],
+    "published_at": "2026-08-29T14:15:41.084Z",
+    "published_variant": 0
   },
   {
     "id": "lr-112",
@@ -2967,8 +2974,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18627840184022171",
+    "published_reply_ids": [
+      "18141443911573739"
+    ],
+    "published_at": "2026-08-29T14:16:38.523Z",
+    "published_variant": 0
   },
   {
     "id": "lr-113",
@@ -2986,8 +3000,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18119808328807365",
+    "published_reply_ids": [
+      "18124901077767609"
+    ],
+    "published_at": "2026-08-29T14:17:36.251Z",
+    "published_variant": 0
   },
   {
     "id": "lr-114",
@@ -3005,8 +3026,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18233377654321821",
+    "published_reply_ids": [
+      "18080014277330303"
+    ],
+    "published_at": "2026-08-29T14:15:41.084Z",
+    "published_variant": 0
   },
   {
     "id": "lr-115",
@@ -3024,8 +3052,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "17950393125256079",
+    "published_reply_ids": [
+      "18145824823557002"
+    ],
+    "published_at": "2026-08-29T14:16:38.523Z",
+    "published_variant": 0
   },
   {
     "id": "lr-116",
@@ -3043,8 +3078,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18112314437097496",
+    "published_reply_ids": [
+      "17913498771445535"
+    ],
+    "published_at": "2026-08-29T14:17:36.251Z",
+    "published_variant": 0
   },
   {
     "id": "lr-117",
@@ -3062,8 +3104,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "18088977236260020",
+    "published_reply_ids": [
+      "18048950858610706"
+    ],
+    "published_at": "2026-08-29T14:15:41.084Z",
+    "published_variant": 0
   },
   {
     "id": "lr-118",
@@ -3081,8 +3130,15 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "17886165075681175",
+    "published_reply_ids": [
+      "18176002684442080"
+    ],
+    "published_at": "2026-08-29T14:16:38.523Z",
+    "published_variant": 0
   },
   {
     "id": "lr-119",
@@ -3100,7 +3156,14 @@
         "checks_passed": true
       }
     ],
-    "status": "pending",
-    "approved_variant": 0
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-29",
+    "published_id": "17961547710190545",
+    "published_reply_ids": [
+      "18108599821870470"
+    ],
+    "published_at": "2026-08-29T14:17:36.251Z",
+    "published_variant": 0
   }
 ]
