@@ -21,6 +21,8 @@ GitHub: https://github.com/Noah1206/saju-threads-bot (비공개, 비밀값 제�
 
     git clone https://github.com/Noah1206/saju-threads-bot
     cd saju-threads-bot          # Node >= 22.9, npm install 불필요
+    nvm use                      # .nvmrc(24) 를 읽음. 낮은 버전이면
+                                 # --experimental-strip-types 에서 "bad option" 으로 죽는다
 
 ## 2. 비밀값 — 둘 중 하나
 

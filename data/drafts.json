@@ -3399,5 +3399,167 @@
     ],
     "published_at": "2026-08-29T14:48:14.534Z",
     "published_variant": 0
+  },
+  {
+    "id": "lr-129",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "yeonae",
+    "cluster": "시의성",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일지 분기 (월건 시의성)",
+        "pages": [
+          "10월 8일 한로부터 무술월. 인오술 삼합이 완성되는 달임\n올해 오화가 술토를 만나 화국으로 굳어지는 구간\n일지 인목\n: 인오술 세 글자가 다 모임. 미뤄뒀던 사람 문제가 이 달에 결론 남\n일지 술토\n: 올해 글자랑 직접 붙음. 소개·모임에서 사람이 붙는 자리\n일지 묘목\n: 묘술합. 조용히 붙는 쪽. 오래 알던 사람이 다르게 보임\n일지 진토\n: 진술충. 이 달은 붙어도 흔들림. 결정은 11월 기해월로 미룰 것\n일지 자수\n: 자오충 그대로임. 9월에 뜸했던 게 이 달에도 안 풀림\n술토는 화를 거두는 글자라 뜨겁게 붙고 빨리 식음\n내 일지는 만세력 생일 줄 아래 글자\n이 달에 붙은 사람이 남을지는 상대 일지까지 봐야 나옴",
+          "올해의 연애운 미리보기\nhttps://loverebbit.xyz/product/yeonae\n생년월일만 넣으면 됨"
+        ],
+        "chars": 349,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "17945946666270452",
+    "published_reply_ids": [
+      "18104060552241045"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-130",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "gyeolhon",
+    "cluster": "시의성",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일간/일지 혼합 분기 (내년 시의성)",
+        "pages": [
+          "내년 정미년에 결혼 얘기 나오는 사주 따로 있음\n2027 정미년. 미토가 올해 오화랑 오미합인 글자임\n일간 임수\n: 정임합. 천간에서 직접 붙음. 열 명 중 결혼 얘기가 제일 먼저 나오는 자리\n일지 오화\n: 오미합. 만나던 사람이랑 형태가 정해짐\n일지 축토\n: 축미충. 얘기는 나오는데 날짜에서 엎어짐. 그 해엔 먼저 잡지 말 것\n일지 자수\n: 자미 원진. 말은 오가는데 서로 다른 걸 상상하고 있음\n일지 해목·묘목\n: 해묘미 삼합. 양가·주변이 먼저 움직여서 밀려서 하게 됨\n일간 계수\n: 정계충. 결혼보다 이별 정리가 먼저 오는 해임\n내 일간은 만세력 생일 줄 위 글자\n올해 붙은 사람이랑 갈지는 상대 사주까지 봐야 나옴",
+          "결혼 사주 미리보기\nhttps://loverebbit.xyz/product/gyeolhon\n생년월일만 넣으면 됨"
+        ],
+        "chars": 349,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "17947083798276380",
+    "published_reply_ids": [
+      "18104574475944856"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-131",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "jaehoe",
+    "cluster": "재회",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일지 분기 (3개월 월건 매칭)",
+        "pages": [
+          "재회 연락 오는 달이 일지마다 다름\n9/8부터 정유월, 10/8부터 무술월, 11/7부터 기해월\n일지 진토\n: 9월 정유월. 진유합이라 상대가 먼저 붙음. 이 달 지나면 다음은 내년임\n일지 사화·축토\n: 9월. 사유축 삼합인데 셋이 엮임. 그 사람 옆에 누가 있는지부터 볼 것\n일지 인목·술토\n: 10월 무술월. 인오술 완성. 연락이 아니라 마주침으로 옴\n일지 묘목\n: 10월. 묘술합. 조용히 옴. 대신 답장 빠르면 또 흐지부지됨\n일지 인목\n: 11월 기해월. 인해합. 명분 만들어서 옴\n일지 유금\n: 11월. 해수가 유금 안 건드려서 이 구간은 조용함\n연락 안 오는 달에 내가 먼저 하면 그 달 결과 그대로 나옴\n내 일지는 만세력 생일 줄 아래 글자\n잡을지 말지는 상대 일주까지 봐야 나옴",
+          "재회 사주 미리보기\nhttps://loverebbit.xyz/product/jaehoe\n생년월일만 넣으면 됨"
+        ],
+        "chars": 387,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "18119197505294246",
+    "published_reply_ids": [
+      "17896849305656867"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-132",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "sseom",
+    "cluster": "썸",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일간 10위 랭킹",
+        "pages": [
+          "썸에서 먼저 연락 끊는 쪽 일간 순위\n1위 경금. 애매하면 그냥 정리함. 두 번 재고 안 함\n2위 신금. 상대 흠 하나 보이면 그 자리에서 식음\n3위 갑목. 먼저 연락하는 걸 지는 걸로 봄. 그래서 둘 다 멈춤\n4위 병화. 확 붙었다 확 식음. 3주가 한계임\n5위 무토. 끊는 게 아니라 그냥 느려져서 자연 소멸됨\n6위 임수. 다른 데 관심 생기면 조용히 옮김\n7위 정화. 못 끊고 혼자 서운해하다 늦게 터뜨림\n8위 을목. 끊긴 다음에도 프로필은 계속 봄\n9위 계수. 티 안 내고 기다림. 먼저는 못 끊음\n10위 기토. 상대가 정리하기 전엔 안 놓음\n올해 병오년은 도화해라 썸 자체는 여기저기서 붙음\n내 일간은 만세력 생일 줄 위 글자\n이번 썸이 끝까지 갈지는 일지까지 봐야 나옴",
+          "썸 사주 미리보기\nhttps://loverebbit.xyz/product/sseom\n생년월일만 넣으면 됨"
+        ],
+        "chars": 380,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "18095342498539875",
+    "published_reply_ids": [
+      "18025139687910186"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-133",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "gwontaegi",
+    "cluster": "권태",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일간 8분기 (세운 십신)",
+        "pages": [
+          "권태기 오는 시점이 일간별로 정해져 있음\n2026 병오년 기준 올해 내 자리에 뭐가 왔는지로 갈림\n갑목 일간\n: 병화가 식신. 편해져서 오는 권태기임. 말이 줄어든 게 싫어진 건 아님\n을목 일간\n: 상관. 상대 흠이 갑자기 보임. 올해 유독 지적이 늘었으면 이거임\n병화·정화 일간\n: 비견·겁재. 밖에 사람이 많아지는 해라 둘만 있는 시간이 줄어서 옴\n무토·기토 일간\n: 편인·정인. 혼자 있고 싶어짐. 상대 문제가 아니라 내 회로 문제임\n경금 일간\n: 편관. 관계가 부담으로 바뀜. 결혼 얘기 나오면 더 심해짐\n신금 일간\n: 병신합. 올해는 오히려 붙음. 권태기는 내년 정미년 편관에서 옴\n임수 일간\n: 편재. 다른 사람이 눈에 들어오는 해. 여기서 갈림\n계수 일간\n: 정재. 관계를 유지비로 계산하기 시작함\n내 일간은 만세력 생일 줄 위 글자\n넘어갈지 끝날지는 상대 일간까지 봐야 나옴",
+          "권태기 사주 미리보기\nhttps://loverebbit.xyz/product/gwontaegi\n생년월일만 넣으면 됨"
+        ],
+        "chars": 441,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "18015678347921730",
+    "published_reply_ids": [
+      "18058016249531653"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-134",
+    "source": "viral-pattern:top15 재생성 (posts.json 실측)",
+    "product": "dohwasal",
+    "cluster": "도화",
+    "created": "2026-08-30",
+    "variants": [
+      {
+        "hook_type": "완결문장훅+일지 분기 (올해 도화)",
+        "pages": [
+          "올해 유독 사람이 붙었으면 도화 때문임\n2026 병오년. 오화가 자오묘유 도화 글자라 올해 자체가 도화해임\n일지 오화\n: 올해 글자랑 같음. 자형이라 붙는 만큼 정리할 일도 같이 생김\n일지 자수·묘목·유금\n: 도화끼리 겹침. 동시에 여럿 붙어서 하나를 못 고름\n일지 미토\n: 오미합. 옛날에 알던 사람이 다시 붙는 쪽\n일지 인목·술토\n: 인오술 삼합. 소개·모임으로 붙음. 사람 통해 들어오는 자리\n일지 축토\n: 축오 원진. 붙긴 하는데 이유를 모르겠는 사람이 붙음\n일지 사화\n: 사오미 방합. 여름에 붙어서 가을에 정리되는 흐름이었음\n도화는 사람이 붙는 자리지 남는 자리가 아님\n내 일지는 만세력 생일 줄 아래 글자\n붙은 사람 중에 남을 사람은 상대 일지까지 봐야 나옴",
+          "도화살 사주 미리보기\nhttps://loverebbit.xyz/product/dohwasal\n생년월일만 넣으면 됨"
+        ],
+        "chars": 375,
+        "checks_passed": true
+      }
+    ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-08-30",
+    "published_id": "18095727707454967",
+    "published_reply_ids": [
+      "17918763846431561"
+    ],
+    "published_at": "2026-08-30T12:23:04.143Z",
+    "published_variant": 0
   }
 ]
