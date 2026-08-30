@@ -3578,9 +3578,12 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "18110364491012643",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   },
   {
     "id": "lr-136",
@@ -3598,9 +3601,12 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "17969488692132901",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   },
   {
     "id": "lr-137",
@@ -3618,9 +3624,12 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "18102967670211770",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   },
   {
     "id": "lr-138",
@@ -3638,9 +3647,12 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "18104434460224503",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   },
   {
     "id": "lr-139",
@@ -3658,9 +3670,12 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "18148162366548567",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   },
   {
     "id": "lr-140",
@@ -3678,8 +3693,11 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-08-30"
+    "approved_at": "2026-08-30",
+    "published_id": "18112872383283469",
+    "published_at": "2026-08-30T12:38:05.718Z",
+    "published_variant": 0
   }
 ]
