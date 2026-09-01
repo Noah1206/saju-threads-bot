@@ -15,7 +15,10 @@ if (!target) { console.log(readFileSync(new URL(import.meta.url), "utf8").split(
 const product = args.includes("--product") ? args[args.indexOf("--product") + 1] : null;
 const file = "data/drafts.json";
 const prefix = "lr-";
-const PRODUCTS = { sokgunghap: "속궁합", jaehoe: "재회 사주", ibyeol: "이별 사주", bamgijil: "자신의 연애 사주", baramgi: "바람기 사주", gyeolhon: "결혼 사주", gwontaegi: "권태기 사주", hwanseung: "환승 사주", yeonae: "올해의 연애운", bimil: "비밀연애 사주", dohwasal: "도화살 사주", sseom: "썸 사주", jjak: "짝사랑 사주" };
+// 상품 목록은 data/products.md 가 단일 출처. 표 행에서 slug|이름 을 읽는다.
+const PRODUCTS = Object.fromEntries(readFileSync("data/products.md", "utf8").split("\n")
+  .map((l) => l.match(/^\|\s*([a-z]+)\s*\|\s*([^|]+?)\s*\|/))
+  .filter((m) => m && m[1] !== "slug").map((m) => [m[1], m[2]]));
 if (product && !PRODUCTS[product]) { console.error("상품 slug 없음:", product, "->", Object.keys(PRODUCTS).join(" ")); process.exit(1); }
 
 const banned = readFileSync(".claude/skills/threads-voice/references/banned.md", "utf8").split("\n").filter((l) => l.startsWith("- ")).map((l) => l.slice(2).split(" (")[0].split(" / ")).flat().map((s) => s.replace(/^~/, "").trim()).filter((s) => s.length > 1);
