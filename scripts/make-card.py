@@ -1,60 +1,84 @@
-# 3D 토끼 이미지 위에 카드 텍스트를 얹는다. 레퍼런스 레이아웃: 로고바 / 초록 라벨 / 하단 큰 타이포
+# 3D 토끼 위에 카드 텍스트. 레퍼런스(sajuplay) 타이포를 그대로 맞춘다:
+#   Heavy 웨이트 / 두꺼운 검정 외곽선 / 좁은 행간 / 좌하단 배치 / 초록 밑줄
+import sys
 from PIL import Image, ImageDraw, ImageFont
+
 F = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
-def font(sz, idx=8):  # 8 = Bold 계열
-    return ImageFont.truetype(F, sz, index=idx)
+HEAVY, BOLD = 16, 6
+def font(sz, idx=HEAVY): return ImageFont.truetype(F, sz, index=idx)
+
+GREEN  = (140, 245, 60)
+YELLOW = (255, 222, 51)
+
+# 사용법:
+#   python card.py out.png "무료 사주" "내 *사주* 몇 월에" "뭐가 걸리는지" "*무료*로 봐줌"
+#   *별표* 로 감싼 말이 초록 + 밑줄. 인자 없으면 아래 기본값.
+def parse(t):
+    if "*" in t:
+        a, hi, b = t.split("*", 2)
+        return (a + hi + b, hi)
+    return (t, None)
+
+args = sys.argv[1:]
+if len(args) >= 3:
+    OUT, TAG = args[0], args[1]
+    LINES = [parse(t) for t in args[2:]]
+else:
+    OUT, TAG = (args[0] if args else "card.png"), "무료 사주"
+    LINES = [parse("내 *사주* 몇 월에"), parse("뭐가 걸리는지"), parse("*무료*로 봐줌")]
 
 im = Image.open("rabbit3d.png").convert("RGB")
 W, H = im.size
 d = ImageDraw.Draw(im, "RGBA")
 
-def rrect(box, r, fill):
-    d.rounded_rectangle(box, radius=r, fill=fill)
+def stroke(xy, s, f, fill, w):
+    """PIL 자체 stroke — 레퍼런스처럼 두껍고 균일한 검정 테두리."""
+    d.text(xy, s, font=f, fill=fill, stroke_width=w, stroke_fill=(0, 0, 0))
 
-def text_out(xy, s, f, fill="white", outline=(0,0,0,90), w=6):
-    x, y = xy
-    for dx in range(-w, w+1, 2):
-        for dy in range(-w, w+1, 2):
-            if dx*dx + dy*dy <= w*w:
-                d.text((x+dx, y+dy), s, font=f, fill=outline)
-    d.text(xy, s, font=f, fill=fill)
+# ── 상단 로고 바
+lf = font(int(W * 0.052), BOLD)
+logo = Image.open("logo.png").convert("RGBA").resize((int(W * 0.072),) * 2)
+barh = int(H * 0.049)
+barw = int(W * 0.072) + int(d.textlength("loverebbit", font=lf)) + int(W * 0.055)
+d.rounded_rectangle((0, 0, barw, barh), radius=0, fill=YELLOW)
+im.paste(logo, (int(W * 0.012), (barh - int(W * 0.072)) // 2), logo)
+d.text((int(W * 0.012) + int(W * 0.072) + int(W * 0.012), barh / 2), "loverebbit",
+       font=lf, fill=(20, 20, 20), anchor="lm")
 
-# --- 상단 로고 바 (노란 라운드 + 로고 + 워드마크)
-pad = int(W*0.035)
-lf = font(int(W*0.055))
-logo = Image.open("logo.png").convert("RGBA").resize((int(W*0.075),)*2)
-bw = int(W*0.075) + int(d.textlength("loverebbit", font=lf)) + pad*2 + 18
-rrect((0, 0, bw, int(H*0.052)), 0, (255, 222, 51, 255))
-im.paste(logo, (pad//2, int(H*0.052/2 - W*0.075/2)), logo)
-d.text((pad//2 + int(W*0.075) + 16, int(H*0.052/2 - W*0.055*0.72)), "loverebbit", font=lf, fill=(20,20,20))
+# ── 초록 라벨 (물결 대신 라운드 — 같은 인상)
+tf = font(int(W * 0.050), BOLD)
+tw = d.textlength(TAG, font=tf)
+cx, ty = W * 0.52, H * 0.058
+padx, padyy = int(W * 0.042), int(W * 0.024)
+d.rounded_rectangle((cx - tw / 2 - padx, ty, cx + tw / 2 + padx, ty + int(W * 0.050) + padyy * 2),
+                    radius=int(W * 0.05), fill=GREEN)
+d.text((cx, ty + (int(W * 0.050) + padyy * 2) / 2), TAG, font=tf, fill=(20, 20, 20), anchor="mm")
 
-# --- 초록 라벨 (상단 중앙)
-tag, tf = "무료 사주", font(int(W*0.052))
-tw = d.textlength(tag, font=tf)
-cx, ty = W*0.5, H*0.062
-rrect((cx-tw/2-int(W*0.045), ty, cx+tw/2+int(W*0.045), ty+int(W*0.098)), int(W*0.049), (140, 245, 60, 255))
-d.text((cx-tw/2, ty+int(W*0.019)), tag, font=tf, fill=(20,20,20))
+# ── 하단 카피: Heavy + 두꺼운 외곽선 + 좁은 행간
+size = int(W * 0.098)
+big  = font(size)
+SW   = max(6, int(size * 0.115))          # 외곽선 두께
+LEAD = int(size * 1.16)                   # 행간 (레퍼런스가 촘촘함)
+x0   = int(W * 0.052)
+y    = H - int(H * 0.085) - LEAD * len(LINES)
 
-# --- 하단 어둡게 (텍스트 가독성)
-for i in range(int(H*0.34)):
-    yy = int(H*0.66) + i
-    d.line([(0, yy), (W, yy)], fill=(0, 0, 0, int(120 * (i / (H*0.34)) ** 0.8)))
+for text, hi in LINES:
+    x = x0
+    if hi and hi in text:
+        pre, post = text.split(hi, 1)
+        ux = x + d.textlength(pre, font=big)
+        uw = d.textlength(hi, font=big)
+        # 밑줄 먼저 (글자 아래, 글자에 안 겹치게)
+        asc, desc = big.getmetrics()
+        uy = y + asc + size * 0.055
+        d.line([(ux, uy), (ux + uw, uy)], fill=GREEN, width=max(5, int(size * 0.070)))
+        for seg, col in ((pre, "white"), (hi, GREEN), (post, "white")):
+            if not seg: continue
+            stroke((x, y), seg, big, col, SW)
+            x += d.textlength(seg, font=big)
+    else:
+        stroke((x, y), text, big, "white", SW)
+    y += LEAD
 
-# --- 하단 카피
-big, accent = font(int(W*0.088)), (140, 245, 60)
-lines = [[("내 ", "white"), ("사주", accent), (" 몇 월에", "white")], [("뭐가 걸리는지", "white")], [("무료로 봐줌", "white")]]
-y = H*0.700
-for ln in lines:
-    x = W*0.055
-    for s, col in ln:
-        text_out((x, y), s, big, fill=col)
-        x += d.textlength(s, font=big)
-    y += W*0.107
-
-# 언더라인 (초록 강조어 밑)
-ul = font(int(W*0.088))
-x0 = W*0.055 + d.textlength("내 ", font=ul)
-d.line([(x0, H*0.700+W*0.097), (x0+d.textlength("사주", font=ul), H*0.700+W*0.097)], fill=accent, width=int(W*0.008))
-
-im.save("card.png", quality=95)
-print("ok", im.size)
+im.save(OUT, quality=95)
+print("ok", OUT, im.size)
