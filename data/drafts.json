@@ -4833,9 +4833,17 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-09-01"
+    "approved_at": "2026-09-01",
+    "published_id": "18115224628985828",
+    "published_reply_ids": [
+      "18033450968844689",
+      "18151293301460420",
+      "18087614042682319"
+    ],
+    "published_at": "2026-09-01T14:05:36.166Z",
+    "published_variant": 0
   },
   {
     "id": "lr-184",
@@ -4855,9 +4863,17 @@
         "checks_passed": true
       }
     ],
-    "status": "approved",
+    "status": "published",
     "approved_variant": 0,
-    "approved_at": "2026-09-01"
+    "approved_at": "2026-09-01",
+    "published_id": "18388102888206818",
+    "published_reply_ids": [
+      "17976070854085344",
+      "18105019006897564",
+      "18625832119051595"
+    ],
+    "published_at": "2026-09-01T14:05:36.166Z",
+    "published_variant": 0
   },
   {
     "id": "lr-185",
@@ -4877,8 +4893,82 @@
         "checks_passed": true
       }
     ],
+    "status": "published",
+    "approved_variant": 0,
+    "approved_at": "2026-09-01",
+    "published_id": "17892519180416434",
+    "published_reply_ids": [
+      "18040681049829895",
+      "18629236324024802",
+      "18443067232132590"
+    ],
+    "published_at": "2026-09-01T14:05:36.166Z",
+    "published_variant": 0
+  },
+  {
+    "id": "lr-186",
+    "source": "review/lr-186-188.md",
+    "product": "sseom",
+    "created": "2026-09-02",
+    "variants": [
+      {
+        "hook_type": "일간 10종 분기(썸)",
+        "pages": [
+          "<9/8 정유월, 일간별로 사람 붙는 방식>\n유금이 도화 글자라\n9월은 사람이 붙는 달임\n붙는 방식이 일간마다 다름",
+          "갑목·을목\n: 유금이 관성임. 이성이 나한테 직접 걸어옴. 거절이 어려운 방식으로 옴\n병화·정화\n: 유금이 재성임. 내가 먼저 눈에 들어옴. 이 달에 안 움직이면 넘어감",
+          "무토·기토\n: 유금이 식상임. 말이 늘고 자리가 늘어남. 소개로 들어오는 자리임\n경금·신금\n: 유금이 본인 글자임. 사람은 몰리는데 순서가 꼬임. 동시에 둘 이상 붙음\n임수·계수\n: 유금이 인성임. 나를 챙겨주는 쪽으로 옴. 편한데 설레지는 않음",
+          "10월 8일 무술월엔 진술충임\n9월에 붙은 게 한 번 흔들림\n\n- 이 달에 시작한 건 10월에 다시 봄\n- 확답은 10월 지나고 받을 것\n- 급하게 정하면 두 번 정함\n\n내 일간은 생일 줄 위 글자임\n같은 일간이어도 일지 따라 반대로 감\nhttps://loverebbit.xyz/product/sseom"
+        ],
+        "chars": 64,
+        "checks_passed": true
+      }
+    ],
     "status": "approved",
     "approved_variant": 0,
-    "approved_at": "2026-09-01"
+    "approved_at": "2026-09-02"
+  },
+  {
+    "id": "lr-187",
+    "source": "review/lr-186-188.md",
+    "product": "jaehoe",
+    "created": "2026-09-02",
+    "variants": [
+      {
+        "hook_type": "촉훅+일지 5갈래(재회)",
+        "pages": [
+          "나 또 무서운 촉이 왔음\n9월에 끊긴 사람한테\n연락 올 일지 다섯 개임\n진토 · 사화 · 축토 · 신금 · 술토",
+          "9/8부터 정유월, 유금이 들어옴\n\n유금은 도화 글자임\n마음이 옛날 쪽으로 도는 달임\n\n이 다섯은 유금이랑 붙는 글자라\n연락이 실제로 닿음",
+          "일지 진토\n: 진유합. 상대가 먼저 붙음. 연락 오면 잡아도 됨\n일지 사화·축토\n: 사유축 삼합. 오긴 오는데 셋이 엮임. 그 사람 옆에 누가 있는지부터 볼 것\n일지 신금·술토\n: 신유술 방합. 같은 판에 있던 사람. 일이나 모임 통해 다시 마주침",
+          "10월 8일 무술월엔 진술충임\n\n9월에 온 연락이\n10월에 한 번 흔들림\n\n- 9월에 답하고 10월에 확인할 것\n- 이 달에 결론까지 내지 말 것\n- 11월 기해월 넘어가면 이 창은 닫힘\n\n내 일지는 생일 줄 아래 글자임\n상대 일주까지 봐야 잡을지 나옴\nhttps://loverebbit.xyz/product/jaehoe"
+        ],
+        "chars": 62,
+        "checks_passed": true
+      }
+    ],
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-09-02"
+  },
+  {
+    "id": "lr-188",
+    "source": "review/lr-186-188.md",
+    "product": "ibyeol",
+    "created": "2026-09-02",
+    "variants": [
+      {
+        "hook_type": "역선택 일지 3갈래(이별)",
+        "pages": [
+          "미안한데 9월에\n정리되는 쪽도 있음\n묘목 · 인목 · 유금",
+          "좋은 소리만 하는 글이 많아서 이건 그냥 씀\n\n9/8부터 정유월임\n유금이 들어오는데\n이 셋한테는 부딪히는 글자임",
+          "일지 묘목\n: 묘유충. 대화 끝이 싸움임. 이 달에 정한 건 그대로 굳음\n일지 인목\n: 인유 원진. 되긴 되는데 계속 껄끄러움. 말이 두 번 돌아서 옴\n일지 유금\n: 글자가 겹침. 사람이 몰려서 순서가 꼬임. 정리 안 하면 다 놓침",
+          "근데 갈라지는 게\n꼭 나쁜 건 아님\n\n- 억지로 끌면 10월에 더 크게 터짐\n- 이 달은 정리하는 달로 쓸 것\n- 묘목은 10월 8일 묘술합에 풀림\n\n9월에 끝난 게\n11월에 다른 사람으로 오기도 함\n\n내 일지는 생일 줄 아래 글자임\n전체 사주 봐야 어느 쪽인지 나옴\nhttps://loverebbit.xyz/product/ibyeol"
+        ],
+        "chars": 32,
+        "checks_passed": true
+      }
+    ],
+    "status": "approved",
+    "approved_variant": 0,
+    "approved_at": "2026-09-02"
   }
 ]
