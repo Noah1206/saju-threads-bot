@@ -1,5 +1,9 @@
 # LOVEREBBIT 상품 링크 (2026-09-01, 20종)
 
+**답글 링크는 홈 `https://loverebbit.xyz` 하나로 고정** (2026-09-02 지시).
+아래 상품 목록은 소재 분류·중복 방지용이다. 상세 페이지 URL을 답글에 직접 넣지 않는다.
+
+
 ## 💗 연애·마음 (8)
 | slug | 상품 | URL |
 |---|---|---|
@@ -39,5 +43,3 @@
 | geongang | 건강운 사주 | https://loverebbit.xyz/product/geongang |
 | gajok | 가족운 사주 | https://loverebbit.xyz/product/gajok |
 | isa | 이사운 사주 | https://loverebbit.xyz/product/isa |
-
-게시물 답글(2/2)에는 주제에 맞는 상품 URL을 직접 넣는다. 미리보기는 각 상품 페이지 안에서 시작.
