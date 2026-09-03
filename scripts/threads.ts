@@ -149,6 +149,27 @@ function tier(posts: Post[]) {
 type PubResult = { id: string; ids: string[]; variantIdx: number };
 
 /** 한 초안 발행 (drafts.json 은 건드리지 않음 — 호출자가 모아서 씀) */
+/**
+ * 우리 링크에 UTM 을 붙인다 — 어느 글이 결제를 만들었는지 알기 위해서.
+ *
+ * 웹앱(loverabbit)의 lib/attribution.ts 가 utm_* 를 받아 두었다가 주문의
+ * metadata.attribution 에 적는다. 그 쪽이 정본이라, 여기서 안 붙이면 도달률까지가
+ * 측정의 끝이고 클릭 뒤는 영영 깜깜하다.
+ *
+ * 우리 도메인만 건드린다. 이미 utm_ 이 붙어 있으면 그대로 둔다(손으로 넣은 것을 이긴다).
+ */
+function tagLinks(text: string, draftId: string): string {
+  return text.replace(/https:\/\/(?:www\.)?loverebbit\.xyz[^\s]*/g, (url) => {
+    if (url.includes("utm_")) return url;
+    // 문장 끝 문장부호는 주소가 아니다 — 떼었다가 도로 붙인다.
+    const m = url.match(/[.,)\]]+$/);
+    const tail = m ? m[0] : "";
+    const bare = tail ? url.slice(0, -tail.length) : url;
+    const sep = bare.includes("?") ? "&" : "?";
+    return `${bare}${sep}utm_source=threads&utm_medium=social&utm_campaign=loverebbit&utm_content=${draftId}${tail}`;
+  });
+}
+
 async function publishOne(d: any, variantIdx: number, dry: boolean): Promise<PubResult | null> {
   if (d.status !== "approved") throw new Error(`${d.id}: status가 approved 아님: ${d.status}`);
   const v = d.variants[variantIdx];
@@ -159,7 +180,7 @@ async function publishOne(d: any, variantIdx: number, dry: boolean): Promise<Pub
   if (raw.some((p) => p.includes("{{LINK}}")) && !link) {
     throw new Error(`${d.id}: 본문에 {{LINK}} 가 있는데 LOVEREBBIT_LINK 가 비어 있음. .env.loverebbit 확인.`);
   }
-  const pages: string[] = raw.map((p) => p.replaceAll("{{LINK}}", link));
+  const pages: string[] = raw.map((p) => tagLinks(p.replaceAll("{{LINK}}", link), d.id));
   if (!pages.length || !pages[0]) throw new Error(`${d.id}: variant ${variantIdx} 본문 없음`);
   pages.forEach((p, i) => {
     if (p.length > 500) throw new Error(`${d.id}: ${i + 1}장 ${p.length}자 — 500자 초과`);
